@@ -7,6 +7,7 @@ class MY_PERIPHERAL : public ExternalPeripheral {
     void Main() override;
     void Stop() override;
   private:
+    iSpiSlaveV1* spi_slave_ {};
 };
 
 extern "C" ExternalPeripheral *PeripheralFactory() {
