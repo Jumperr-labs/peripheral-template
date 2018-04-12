@@ -7,7 +7,11 @@ class MY_PERIPHERAL : public ExternalPeripheral {
     void Main() override;
     void Stop() override;
   private:
-    iSpiSlaveV1* spi_slave_ {};
+    /**********************************************************************************
+    TODO: Uncomment the following code to enable SPI capabilities for the peripheral.
+          Make sure to uncomment the coresponding code in MY_PERIPHERAL.cpp as well.
+    **********************************************************************************/
+    // iSpiSlaveV1* spi_slave_ {};
 };
 
 extern "C" ExternalPeripheral *PeripheralFactory() {
