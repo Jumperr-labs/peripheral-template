@@ -9,7 +9,7 @@
 		},
 		{
 			"name": "MY_PERIPHERAL",
-			"id": 2,
+			"id": 1,
 			"type": "Peripheral",
 			"file": "_build/MY_PERIPHERAL.so",
 			"config": {
