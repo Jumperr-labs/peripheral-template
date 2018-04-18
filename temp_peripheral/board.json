@@ -1,0 +1,21 @@
+{
+	"description": "Nrf52-DK",
+	"components": [
+		{
+			"name": "nrf52832",
+			"id": 0,
+			"type": "MCU",
+			"class": "MCU"
+		},
+		{
+			"name": "MY_PERIPHERAL",
+			"id": 2,
+			"type": "Peripheral",
+			"file": "_build/MY_PERIPHERAL.so",
+			"config": {
+				"pins": {
+				}
+			}
+		}
+	]
+}
