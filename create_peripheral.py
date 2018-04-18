@@ -3,13 +3,11 @@ import os
 import subprocess
 
 string_to_replace = "MY_PERIPHERAL"
-peripheral_name = "MY_PERIPHERAL"
 temp_cpp_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', 'MY_PERIPHERAL.cpp'))
 temp_h_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', 'MY_PERIPHERAL.h'))
 temp_makefile = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', 'Makefile'))
 
-print "Enter your peripheral name (press enter in order to use the default name '{}'):".format(peripheral_name),
-peripheral_name = raw_input()
+peripheral_name = raw_input("Please enter your peripheral name (press enter in order to use the default name 'MY_PERIPHERAL'): ") or "MY_PERIPHERAL"
 
 cpp_file = os.path.abspath(os.path.join(os.path.dirname(__file__),  peripheral_name + ".cpp"))
 h_file = os.path.abspath(os.path.join(os.path.dirname(__file__),  peripheral_name + ".h"))
