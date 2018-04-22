@@ -9,7 +9,7 @@ For more information, visit [the docs](https://docs.jumper.io).
 - [Jumper Virtual Lab](https://docs.jumper.io)
 
 or
-- Pull Jumper's Docker image: docker pull jumperio/jumper-vlab
+- Jumper's Docker image, pull it with - `docker pull jumperio/jumper-vlab`
 
 ## First step
 - Fork [this repository](https://github.com/Jumperr-labs/peripheral-template) on GitHub and clone the new repository onto your Linux machine.
