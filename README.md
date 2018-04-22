@@ -7,6 +7,7 @@ For more information, visit [the docs](https://docs.jumper.io).
 - Ubuntu 16.04
 - GCC and Make: `apt install build-essential`
 - [Jumper Virtual Lab](https://docs.jumper.io)
+
 or
 - Pull Jumper's Docker image: docker pull jumperio/jumper-vlab
 
