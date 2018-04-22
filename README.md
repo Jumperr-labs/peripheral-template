@@ -34,15 +34,15 @@ For more information, visit [the docs](https://docs.jumper.io).
 
   ```json
   {
-			"name": "YOUR_PERIPHERAL_NAME",
-			"id": 1,
-			"type": "Peripheral",
-			"file": "_build/YOUR_PERIPHERAL_NAME.so",
-			"config": {
-				"pins": {
-				}
-			}
+	"name": "YOUR_PERIPHERAL_NAME",
+	"id": 1,
+	"type": "Peripheral",
+	"file": "_build/YOUR_PERIPHERAL_NAME.so",
+	"config": {
+		"pins": {
 		}
+	}
+  }
   ```
 
 ## Usage
