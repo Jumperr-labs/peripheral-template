@@ -26,10 +26,10 @@ For more information, visit [the docs](https://docs.jumper.io).
 
 ## Peripheral pinout and configuration template
 - You can find your peripheral component template in the board.json file with the following key fields:
--1. id - needs to be a unique number across all the peripherals in the board.json.
--2. type - no need to change this one.
--3. file - this tells the Virtual Lab where to find the shared object file for the peripheral. The default points to the YOUR_PERIPHERAL_NAME.so file in the _build folder.
--4. config: pins - this is where you can add pins. To add pins according to the peripheral's data sheet, just add pins to this list with the field name as the pin name and the value as the board's wire number.
+ 1. id - needs to be a unique number across all the peripherals in the board.json.
+ 2. type - no need to change this one.
+ 3. file - this tells the Virtual Lab where to find the shared object file for the peripheral. The default points to the YOUR_PERIPHERAL_NAME.so file in the _build folder.
+ 4. config: pins - this is where you can add pins. To add pins according to the peripheral's data sheet, just add pins to this list with the field name as the pin name and the value as the board's wire number.
 
 
   ```json
@@ -49,10 +49,10 @@ For more information, visit [the docs](https://docs.jumper.io).
 - Add the device logic to the Main() function in the YOUR_PERIPHERAL_NAME.cpp. You can also add more methods, members and global variables as needed.
 
 - When you want to run Jumper Virtual Lab with your peripheral:
--1. Run `make`
--2. Copy the .so file from the "_build/" directory to your Jumper Virtual Lab working directory. (same one as the "board.json" file) 
--3. Add the component to your "board.json" file.
--4. Run Jumper Virtual Lab, for more information head to the https://docs.jumper.io/ 
+ 1. Run `make`
+ 2. Copy the .so file from the "_build/" directory to your Jumper Virtual Lab working directory. (same one as the "board.json" file) 
+ 3. Add the component to your "board.json" file.
+ 4. Run Jumper Virtual Lab, for more information head to the https://docs.jumper.io/ 
 
 
 ## License
