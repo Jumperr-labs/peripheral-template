@@ -49,10 +49,10 @@ For more information, visit [the docs](https://docs.jumper.io).
 - Add the device logic to the Main() function in the YOUR_PERIPHERAL_NAME.cpp. You can also add more methods, members and global variables as needed.
 
 - When you want to run Jumper Virtual Lab with your peripheral:
-  1. Run `make`
-  2. Copy the .so file from the "_build/" directory to your Jumper Virtual Lab working directory. (same one as the "board.json" file) 
-  3. Add the component to your "board.json" file.
-  4. Run Jumper Virtual Lab, for more information , head to the https://docs.jumper.io/ 
+1. Run `make`
+2. Copy the .so file from the "_build/" directory to your Jumper Virtual Lab working directory. (same one as the "board.json" file) 
+3. Add the component to your "board.json" file.
+4. Run Jumper Virtual Lab, for more information head to the https://docs.jumper.io/ 
 
 
 ## License
