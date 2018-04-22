@@ -45,7 +45,7 @@ For more information, visit [the docs](https://docs.jumper.io).
 		}
   ```
 
-# Usage
+## Usage
 - Add the device logic to the Main() function in the YOUR_PERIPHERAL_NAME.cpp. You can also add more methods, members and global variables as needed.
 
 - When you want to run Jumper Virtual Lab with your peripheral:
