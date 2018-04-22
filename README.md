@@ -7,10 +7,12 @@ For more information, visit [the docs](https://docs.jumper.io).
 - Ubuntu 16.04
 - GCC and Make: `apt install build-essential`
 - [Jumper Virtual Lab](https://docs.jumper.io)
+or
+- Pull Jumper's Docker image: docker pull jumperio/jumper-vlab
 
 ## First step
 - Fork [this repository](https://github.com/Jumperr-labs/peripheral-template) on GitHub and clone the new repository onto your Linux machine.
-- Make sure you have the build prerequisites by running the following:
+- Make sure you have the build prerequisites by running the following (**either from Ubuntu 16.04 or Jumper's Docker image**):
   
   ```bash
   cd /PATH/TO/YOUR/NEW/REPO
