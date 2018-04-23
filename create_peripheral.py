@@ -6,9 +6,9 @@ string_to_replace = "MY_PERIPHERAL"
 temp_makefile = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', 'Makefile'))
 temp_board = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', 'board.json'))
 
-communication_string = "\n\t1.None\n\t2.I2C\n\t3.SPI\nEnter your communication number (press enter in order to use the default None type):\n"
+communication_string = "\n\t1.None\n\t2.I2C\n\t3.SPI\nEnter a number to choose the serial interface type (press enter in order to use the default None type):\n"
 peripheral_name = raw_input("Please enter your peripheral name (press enter in order to use the default name 'MY_PERIPHERAL'): ") or "MY_PERIPHERAL"
-communication_type = raw_input("Please select your peripheral communication type: " + communication_string) or "1"
+communication_type = raw_input("Please select your peripheral's serial interface type: " + communication_string) or "1"
 communication_path = "general"
 
 try:
@@ -20,10 +20,10 @@ try:
     elif communication_type_number == 3:
         communication_path = "spi"
     else:
-        print("Wrong communication type number. Should be 1, 2 or 3. Try to run again.")
+        print("Wrong serial interface type number. Should be 1, 2 or 3. Try to run again.")
         exit(1)
 except Exception:
-   print("Wrong communication type number. Should be 1, 2 or 3. Try to run again.")
+   print("Wrong serial interface type number. Should be 1, 2 or 3. Try to run again.")
    exit(1)
 
 
