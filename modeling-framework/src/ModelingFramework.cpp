@@ -1,13 +1,14 @@
 #include "ModelingFramework.h"
 #include <cassert>
 #include <utility>
-#include <map>
+#include <unordered_map>
 #include "iJemuInterface.h"
 #include <iostream>
+#include <memory>
 
 iJemuInterface *jemu_interface_ = nullptr;
 
-std::map<int, callback_t> callbacks_map_;
+std::unordered_map<int, callback_t> timers_callbacks_map_;
 
 DLL_EXPORT void InitJemuInterface(iJemuInterface *jemu_interface) {
     jemu_interface_ = jemu_interface;
@@ -21,6 +22,11 @@ int GetPinNumber(const std::string &pin_name) {
 iSpiSlave* CreateSpiSlave(SpiSlaveConfig &spi_config) {
     assert(jemu_interface_);
     return jemu_interface_->CreateSpiSlave(spi_config);
+}
+
+iI2cSlave* CreateI2cSlave() {
+    assert(jemu_interface_);
+    return jemu_interface_->CreateI2cSlave();
 }
 
 bool GetPinLevel(int pin_number) {
@@ -71,15 +77,14 @@ double GetCachedValueFromDataGenerator(std::string name) {
 }
 
 void TimedCallback (int id) {
-    assert(callbacks_map_.find(id) != callbacks_map_.end());
-    callbacks_map_[id]();
+    assert(timers_callbacks_map_.find(id) != timers_callbacks_map_.end());
+    timers_callbacks_map_[id]();
 }
 
-int AddTimedCallback(uint64_t ns, const callback_t &callback,  bool run_once) {
+int AddTimedCallback(uint64_t ns, const callback_t &callback, bool run_once) {
     assert(jemu_interface_);
-    void (*internal_callback)(int id) = &TimedCallback;
-    int id = jemu_interface_->AddTimedCallback(ns, internal_callback, run_once);
-    callbacks_map_[id] = callback;
+    int id = jemu_interface_->AddTimedCallback(ns, &TimedCallback, run_once);
+    timers_callbacks_map_[id] = callback;
     return id;
 }
 
@@ -91,4 +96,26 @@ void CancelTimedCallback(int id) {
 void UpdateTimedCallback(int id, uint64_t ns) {
     assert(jemu_interface_);
     jemu_interface_->UpdateTimedCallback(id,ns);
+}
+
+void SetMultiplePinsLevel(const pin_level_changes_t& pin_changes) {
+    assert(jemu_interface_);
+
+    if (pin_changes.empty()) 
+        return;
+
+    std::unique_ptr<WireChange> arr(new WireChange[pin_changes.size()]);
+    std::copy(pin_changes.begin(),pin_changes.end(), arr.get() );
+    jemu_interface_->SetMultiplePinsLevel(arr.get(), pin_changes.size());
+}
+
+void SetPinDirection(uint32_t pin_id, pin_direction_t direction, bool pullup) {
+    assert(jemu_interface_);
+    jemu_interface_->SetPinDirection(pin_id, direction, pullup);
+}
+
+void SetPinChangeLevelEventCallback(uint32_t pin_id, const pin_change_level_callback_t& pin_change_level_callback) {
+    assert(jemu_interface_);
+
+    jemu_interface_->SetPinChangeLevelEventCallback(pin_id, pin_change_level_callback);
 }
