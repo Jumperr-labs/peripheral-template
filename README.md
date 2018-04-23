@@ -20,7 +20,7 @@ or
   python create_peripheral.py
   ```
 
-- After entering your peripheral name you should see the following files in your local library:
+- After entering your peripheral name and choosing your peripheral's serial interface type, you should see the following files in your local library:
 1. Makefile
 2. board.json
 2. YOUR_PERIPHERAL_NAME.cpp
