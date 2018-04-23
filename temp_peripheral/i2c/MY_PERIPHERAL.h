@@ -8,7 +8,7 @@ class MY_PERIPHERAL : public ExternalPeripheral {
     void Stop() override;
   private:
      iI2cSlave* i2c_slave_{};
-     uint8_t device_address_{}
+     uint8_t device_address_{};
      void OnMasterRead(uint8_t device_address, iI2cSlaveBaseWriteStream& i2c_slave_read_stream);
      void OnMasterWrite(uint8_t device_address, iI2cSlaveBaseReadStream& i2c_slave_write_stream);
 };
