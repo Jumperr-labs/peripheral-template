@@ -3,12 +3,32 @@ import os
 import subprocess
 
 string_to_replace = "MY_PERIPHERAL"
-temp_cpp_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', 'MY_PERIPHERAL.cpp'))
-temp_h_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', 'MY_PERIPHERAL.h'))
 temp_makefile = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', 'Makefile'))
 temp_board = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', 'board.json'))
 
+communication_string = "\n1.None\n2.I2C\n3.SPI\nEnter selected number (press enter in order to use the default None type)"
 peripheral_name = raw_input("Please enter your peripheral name (press enter in order to use the default name 'MY_PERIPHERAL'): ") or "MY_PERIPHERAL"
+communication_type = raw_input("Please select the communication type: " + communication_string) or "1"
+communication_path = "general"
+
+try:
+    communication_type_number = int(communication_type)
+    if communication_type_number == 1:
+        communication_path = "general"
+    elif communication_type_number == 2:
+        communication_path = "i2c"
+    elif communication_type_number == 3:
+        communication_path = "spi"
+    else:
+        print("Wrong communication type number. Should be 1, 2 or 3. Try to run again")
+        exit(1)
+except Exception:
+   print("Wrong communication type number. Should be 1, 2 or 3. Try to run again")
+   exit(1)
+
+
+temp_cpp_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', communication_path, 'MY_PERIPHERAL.cpp'))
+temp_h_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', communication_path, 'MY_PERIPHERAL.h'))
 
 cpp_file = os.path.abspath(os.path.join(os.path.dirname(__file__),  peripheral_name + ".cpp"))
 h_file = os.path.abspath(os.path.join(os.path.dirname(__file__),  peripheral_name + ".h"))
