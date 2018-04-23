@@ -8,23 +8,28 @@ temp_board = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_perip
 
 communication_string = "\n\t1.None\n\t2.I2C\n\t3.SPI\nEnter a number to choose the serial interface type (press enter in order to use the default None type):\n"
 peripheral_name = raw_input("Please enter your peripheral name (press enter in order to use the default name 'MY_PERIPHERAL'): ") or "MY_PERIPHERAL"
-communication_type = raw_input("Please select your peripheral's serial interface type: " + communication_string) or "1"
 communication_path = "general"
 
-try:
-    communication_type_number = int(communication_type)
-    if communication_type_number == 1:
-        communication_path = "general"
-    elif communication_type_number == 2:
-        communication_path = "i2c"
-    elif communication_type_number == 3:
-        communication_path = "spi"
-    else:
-        print("Wrong serial interface type number. Should be 1, 2 or 3. Try to run again.")
-        exit(1)
-except Exception:
-   print("Wrong serial interface type number. Should be 1, 2 or 3. Try to run again.")
-   exit(1)
+type_selected = False
+while not type_selected:
+    try:
+        communication_type = raw_input("Please select your peripheral's serial interface type: " + communication_string) or "1"
+        if communication_type == "exit":
+            exit(0)
+        communication_type_number = int(communication_type)
+        if communication_type_number == 1:
+            type_selected = True
+            communication_path = "general"
+        elif communication_type_number == 2:
+            type_selected = True
+            communication_path = "i2c"
+        elif communication_type_number == 3:
+            type_selected = True
+            communication_path = "spi"
+        else:
+            print("Wrong serial interface type number. Should be 1, 2 or 3.")
+    except Exception:
+       print("Wrong serial interface type number. Should be 1, 2 or 3.")
 
 
 temp_cpp_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp_peripheral', communication_path, 'MY_PERIPHERAL.cpp'))
