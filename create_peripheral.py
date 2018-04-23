@@ -23,7 +23,7 @@ try:
         print("Wrong communication type number. Should be 1, 2 or 3. Try to run again.")
         exit(1)
 except Exception:
-   print("Wrong communication type number. Should be 1, 2 or 3. Try to run again")
+   print("Wrong communication type number. Should be 1, 2 or 3. Try to run again.")
    exit(1)
 
 
