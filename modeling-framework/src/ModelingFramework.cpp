@@ -114,8 +114,23 @@ void SetPinDirection(uint32_t pin_id, pin_direction_t direction, bool pullup) {
     jemu_interface_->SetPinDirection(pin_id, direction, pullup);
 }
 
-void SetPinChangeLevelEventCallback(uint32_t pin_id, const pin_change_level_callback_t& pin_change_level_callback) {
-    assert(jemu_interface_);
+class PinChangeLevelEventCallback : public iPinChangeLevelEventCallback {
+  public:
+    explicit PinChangeLevelEventCallback(pin_change_level_callback_t pin_change_level_callback) :
+            pin_change_level_callback_(std::move(pin_change_level_callback)) {}
+    void Call(WireLogicLevelEvent* arr, size_t size) override {
+        WireLogicLevelEventVector_t vec;
+        std::copy(arr, arr + size, std::back_inserter(vec));
+        pin_change_level_callback_(vec);
+    }
+  private:
+    pin_change_level_callback_t pin_change_level_callback_;
+};
 
+int SetPinChangeLevelEventCallback(uint32_t pin_id, const pin_change_level_callback_t& callback) {
+    assert(jemu_interface_);
+    static int id = 0;
+    auto pin_change_level_callback = new PinChangeLevelEventCallback(callback);
     jemu_interface_->SetPinChangeLevelEventCallback(pin_id, pin_change_level_callback);
+    return id++;
 }

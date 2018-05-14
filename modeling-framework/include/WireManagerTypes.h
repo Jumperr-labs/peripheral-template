@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <utility>
 #include <vector>
 #include <functional>
 
@@ -10,15 +11,16 @@ typedef enum {
 } transition_type_t;
 
 typedef enum {
-    DIRECTION_IN,
-    DIRECTION_OUT,
-    UNDEFINED
+    DIRECTION_IN = 0,
+    DIRECTION_OUT = 1,
+    DIRECTION_ALTERNATE_FUNCTION = 2,
+    UNDEFINED = 3
 } pin_direction_t;
 
 typedef enum {
     DISABLED = 0,
-    PULL_DOWN = 1,
-    PULL_UP = 3
+    PULL_UP = 1,
+    PULL_DOWN = 2,
 } pin_pullup_t;
 
 /*
@@ -47,7 +49,7 @@ typedef struct {
 } ConstWireState;
 
 
-struct WireChange{
+struct WireChange {
     WireChange() = default;
     WireChange(uint32_t wire_number, bool level_is_high, uint32_t pin_number) :
         wire_number_(wire_number),
@@ -63,14 +65,7 @@ typedef std::vector<WireChange> pin_level_changes_t;
 typedef std::vector<WireLogicLevelEvent> WireLogicLevelEventVector_t;
 typedef std::function<void(WireLogicLevelEventVector_t& notifications )> pin_change_level_callback_t;
 
-struct PinChangeLevelEventCallback {
-    PinChangeLevelEventCallback(const pin_change_level_callback_t& pin_change_level_callback) :
-        pin_change_level_callback_(pin_change_level_callback){}
-
-    void operator()(WireLogicLevelEvent* arr, size_t size) {
-        WireLogicLevelEventVector_t vec;
-        std::copy(arr, arr + size, std::back_inserter(vec));
-        pin_change_level_callback_(vec);
-    }
-    pin_change_level_callback_t pin_change_level_callback_;
+class iPinChangeLevelEventCallback {
+  public:
+    virtual void Call(WireLogicLevelEvent* arr, size_t size) = 0;
 };
